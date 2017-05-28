@@ -17,6 +17,21 @@ To install via [Composer](http://getcomposer.org/), use the command below, it wi
 composer require wyrihaximus/react-child-process-promise-closure 
 ```
 
+## Usage ##
+
+Usage is simple, just pass the function the event loop and a closure that returns an array as result or throws a `Throwable` on errors and it will run in a freshly spawned child process.
+
+```php
+use function WyriHaximus\React\childProcessPromiseClosure;
+
+childProcessPromiseClosure($loop, function () {
+    return ['message' => 'The closure MUST always return an array'];
+})->done(function ($time) {
+    echo $time['message'], PHP_EOL;
+});
+
+```
+
 ## Examples ##
 
 For examples see the [examples](https://github.com/WyriHaximus/reactphp-child-process-promise-closure/tree/master/examples) directory
