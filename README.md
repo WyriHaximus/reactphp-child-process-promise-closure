@@ -19,13 +19,13 @@ composer require wyrihaximus/react-child-process-promise-closure
 
 ## Usage ##
 
-Usage is simple, just pass the function the event loop and a closure that returns an array as result or throws a `Throwable` on errors and it will run in a freshly spawned child process.
+Usage is simple, just pass the function the event loop and a closure that returns an JSON encodable array as result or throws a `Throwable` on errors and it will run in a freshly spawned child process.
 
 ```php
 use function WyriHaximus\React\childProcessPromiseClosure;
 
 childProcessPromiseClosure($loop, function () {
-    return ['message' => 'The closure MUST always return an array'];
+    return ['message' => 'The closure MUST always return an JSON encodable array'];
 })->done(function ($time) {
     echo $time['message'], PHP_EOL;
 });
