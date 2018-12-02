@@ -22,15 +22,15 @@ function childProcessPromiseClosure(LoopInterface $loop, Closure $closure): Prom
 {
     return Factory::parentFromClass(ClosureChild::class, $loop)->then(function (Messenger $messenger) use ($closure) {
         $deferred = new Deferred();
-        $messenger->on('error', function (Throwable $throwable) use ($deferred, $messenger) {
+        $messenger->on('error', function (Throwable $throwable) use ($deferred, $messenger): void {
             $deferred->reject($throwable);
             $messenger->softTerminate();
         });
 
-        $messenger->rpc(MessageFactory::rpc($closure))->done(function (Payload $payload) use ($deferred, $messenger) {
+        $messenger->rpc(MessageFactory::rpc($closure))->done(function (Payload $payload) use ($deferred, $messenger): void {
             $deferred->resolve($payload->getPayload());
             $messenger->softTerminate();
-        }, function (Throwable $throwable) use ($deferred, $messenger) {
+        }, function (Throwable $throwable) use ($deferred, $messenger): void {
             $deferred->reject($throwable);
             $messenger->softTerminate();
         });

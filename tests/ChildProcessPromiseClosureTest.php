@@ -7,9 +7,12 @@ use React\EventLoop\Factory;
 use function Clue\React\Block\await;
 use function WyriHaximus\React\childProcessPromiseClosure;
 
+/**
+ * @internal
+ */
 final class ChildProcessPromiseClosureTest extends TestCase
 {
-    public function testChildProcessPromiseClosure()
+    public function testChildProcessPromiseClosure(): void
     {
         $loop = Factory::create();
 

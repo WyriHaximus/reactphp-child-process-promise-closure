@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-require dirname(__DIR__) . '/vendor/autoload.php';
+require \dirname(__DIR__) . '/vendor/autoload.php';
 
 use React\EventLoop\Factory as EventLoopFactory;
 use function WyriHaximus\React\childProcessPromiseClosure;
@@ -7,10 +7,10 @@ use function WyriHaximus\React\childProcessPromiseClosure;
 $loop = EventLoopFactory::create();
 
 childProcessPromiseClosure($loop, function () {
-    return ['time'=>time()];
-})->done(function ($time) {
+    return ['time'=>\time()];
+})->done(function ($time): void {
     echo $time['time'], PHP_EOL;
-}, function (Throwable $throwable) {
+}, function (Throwable $throwable): void {
     echo (string)$throwable;
 });
 

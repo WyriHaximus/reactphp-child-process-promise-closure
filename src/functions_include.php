@@ -2,6 +2,6 @@
 
 namespace WyriHaximus\React;
 
-if (!function_exists('WyriHaximus\React\childProcessPromiseClosure')) {
+if (!\function_exists('WyriHaximus\React\childProcessPromiseClosure')) {
     require __DIR__ . '/functions.php';
 }
