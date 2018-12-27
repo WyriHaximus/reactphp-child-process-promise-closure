@@ -1,5 +1,6 @@
 {
     "name": "wyrihaximus/react-child-process-promise-closure",
+    "description": "ReactPHP Child Process Promise Closure child class",
     "license": "MIT",
     "authors": [
         {
