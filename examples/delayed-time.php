@@ -8,13 +8,13 @@ $loop = EventLoopFactory::create();
 
 for ($i = 1; $i < 31; $i++) {
     $delay = $i;
-    echo \time(), ': ', $delay, PHP_EOL;
+    echo \time(), ': ', $delay, \PHP_EOL;
     childProcessPromiseClosure($loop, function () use ($delay) {
         \sleep($delay * 2);
 
         return ['time'=>\time()];
     })->done(function ($time): void {
-        echo \time(), ': ', $time['time'], PHP_EOL;
+        echo \time(), ': ', $time['time'], \PHP_EOL;
     }, function (Throwable $throwable): void {
         echo (string)$throwable;
     });
