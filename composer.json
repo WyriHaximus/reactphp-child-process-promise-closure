@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "react/promise": "^2.5",
+        "react/promise": "^2.7",
         "wyrihaximus/react-child-process-closure": "^1.0"
     },
     "require-dev": {
