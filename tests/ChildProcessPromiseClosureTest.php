@@ -2,9 +2,9 @@
 
 namespace WyriHaximus\React\Tests\ChildProcess\Closure;
 
+use function Clue\React\Block\await;
 use PHPUnit\Framework\TestCase;
 use React\EventLoop\Factory;
-use function Clue\React\Block\await;
 use function WyriHaximus\React\childProcessPromiseClosure;
 
 /**
