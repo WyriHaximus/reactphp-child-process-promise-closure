@@ -1,29 +1,26 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\React\Tests\ChildProcess\Closure;
 
-use function Clue\React\Block\await;
-use PHPUnit\Framework\TestCase;
-use React\EventLoop\Factory;
+use React\EventLoop\Loop;
+use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
+
 use function WyriHaximus\React\childProcessPromiseClosure;
 
 /**
  * @internal
  */
-final class ChildProcessPromiseClosureTest extends TestCase
+final class ChildProcessPromiseClosureTest extends AsyncTestCase
 {
     public function testChildProcessPromiseClosure(): void
     {
-        $loop = Factory::create();
-
-        $data = 1337;
-        $result = await(
-            childProcessPromiseClosure($loop, function () use ($data) {
-                return [$data];
-            }),
-            $loop
+        $data   = 1337;
+        $result = $this->await(
+            childProcessPromiseClosure(Loop::get(), static fn (): array => [$data])
         );
-        $loop->run();
+        Loop::run();
 
         self::assertSame([1337], $result);
     }

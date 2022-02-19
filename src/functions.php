@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\React;
 
@@ -14,23 +16,27 @@ use WyriHaximus\React\ChildProcess\Messenger\Messages\Payload;
 use WyriHaximus\React\ChildProcess\Messenger\Messenger;
 
 /**
- * @param  LoopInterface    $loop
- * @param  Closure          $closure
- * @return PromiseInterface
+ * @return PromiseInterface<mixed>
+ *
+ * @psalm-suppress TooManyTemplateParams
+ * @phpstan-ignore-next-line
  */
 function childProcessPromiseClosure(LoopInterface $loop, Closure $closure): PromiseInterface
 {
-    return Factory::parentFromClass(ClosureChild::class, $loop)->then(function (Messenger $messenger) use ($closure) {
+    /**
+     * @psalm-suppress TooManyTemplateParams
+     */
+    return Factory::parentFromClass(ClosureChild::class, $loop)->then(static function (Messenger $messenger) use ($closure): PromiseInterface {
         $deferred = new Deferred();
-        $messenger->on('error', function (Throwable $throwable) use ($deferred, $messenger): void {
+        $messenger->on('error', static function (Throwable $throwable) use ($deferred, $messenger): void {
             $deferred->reject($throwable);
             $messenger->softTerminate();
         });
 
-        $messenger->rpc(MessageFactory::rpc($closure))->done(function (Payload $payload) use ($deferred, $messenger): void {
+        $messenger->rpc(MessageFactory::rpc($closure))->then(static function (Payload $payload) use ($deferred, $messenger): void {
             $deferred->resolve($payload->getPayload());
             $messenger->softTerminate();
-        }, function (Throwable $throwable) use ($deferred, $messenger): void {
+        }, static function (Throwable $throwable) use ($deferred, $messenger): void {
             $deferred->reject($throwable);
             $messenger->softTerminate();
         });

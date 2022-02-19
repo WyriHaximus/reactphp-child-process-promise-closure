@@ -9,82 +9,48 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
+        "react/event-loop": "^1.2",
         "react/promise": "^2.7",
-        "wyrihaximus/react-child-process-closure": "^1.0"
+        "wyrihaximus/react-child-process-closure": "^1.0",
+        "wyrihaximus/react-child-process-messenger": "^4.0"
     },
     "require-dev": {
-        "api-clients/cs-fixer-config": "^1.1",
-        "api-clients/test-utilities": "^5.4"
+        "wyrihaximus/async-test-utilities": "^4.2"
     },
     "autoload": {
         "psr-4": {
             "WyriHaximus\\React\\": "src/"
         },
-        "files": ["src/functions_include.php"]
+        "files": [
+            "src/functions_include.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "WyriHaximus\\React\\Tests\\": "tests/"
+            "WyriHaximus\\React\\Tests\\ChildProcess\\Closure\\": "tests/"
         }
     },
     "config": {
-        "sort-packages": true,
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "wyrihaximus/composer-update-bin-autoload-path": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "icanhazstring/composer-unused": true,
+            "ergebnis/composer-normalize": true,
+            "composer/package-versions-deprecated": true
+        },
         "platform": {
-            "php": "7.2"
-        }
+            "php": "7.4.7"
+        },
+        "sort-packages": true
     },
     "scripts": {
-        "ensure-installed": "composer install --ansi -n -q",
-        "cs": [
-            "@ensure-installed",
-            "php-cs-fixer fix --config=.php_cs --ansi --dry-run --diff --verbose --allow-risky=yes --show-progress=estimating"
+        "post-install-cmd": [
+            "composer normalize"
         ],
-        "cs-fix": [
-            "@ensure-installed",
-            "php-cs-fixer fix --config=.php_cs --ansi --verbose --allow-risky=yes --show-progress=estimating"
-        ],
-        "unit": [
-            "@ensure-installed",
-            "phpunit --colors=always -c phpunit.xml.dist"
-        ],
-        "unit-coverage": [
-            "@ensure-installed",
-            "phpunit --colors=always -c phpunit.xml.dist --coverage-text --coverage-html covHtml --coverage-clover ./build/logs/clover.xml"
-        ],
-        "lint-php": [
-            "@ensure-installed",
-            "parallel-lint --exclude vendor ."
-        ],
-        "qa-all": [
-            "@lint-php",
-            "@cs",
-            "@unit"
-        ],
-        "qa-all-coverage": [
-            "@lint-php",
-            "@cs",
-            "@unit-coverage"
-        ],
-        "qa-windows": [
-            "@lint-php",
-            "@cs",
-            "@unit"
-        ],
-        "qa-ci": [
-            "@unit"
-        ],
-        "qa-ci-extended": [
-            "@qa-all-coverage"
-        ],
-        "qa-ci-windows": [
-            "@qa-windows"
-        ],
-        "qa-contrib": [
-            "@qa-all"
-        ],
-        "ci-coverage": [
-            "if [ -f ./build/logs/clover.xml ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml; fi"
+        "post-update-cmd": [
+            "composer normalize"
         ]
     }
 }
