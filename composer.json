@@ -9,11 +9,11 @@
         }
     ],
     "require": {
-        "php": "^7.4",
+        "php": "^8 || ^7.4",
         "react/event-loop": "^1.2",
         "react/promise": "^2.7",
-        "wyrihaximus/react-child-process-closure": "^1.0",
-        "wyrihaximus/react-child-process-messenger": "^4.0"
+        "wyrihaximus/react-child-process-closure": "^1.2",
+        "wyrihaximus/react-child-process-messenger": "^4.0.2"
     },
     "require-dev": {
         "wyrihaximus/async-test-utilities": "^4.2"
