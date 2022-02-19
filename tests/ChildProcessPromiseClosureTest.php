@@ -18,7 +18,9 @@ final class ChildProcessPromiseClosureTest extends AsyncTestCase
     {
         $data   = 1337;
         $result = $this->await(
-            childProcessPromiseClosure(Loop::get(), static fn (): array => [$data])
+            childProcessPromiseClosure(Loop::get(), static function () use ($data): array {
+                return [$data];
+            })
         );
         Loop::run();
 
