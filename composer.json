@@ -13,7 +13,7 @@
         "react/event-loop": "^1.2",
         "react/promise": "^2.7",
         "wyrihaximus/react-child-process-closure": "^1.2",
-        "wyrihaximus/react-child-process-messenger": "^4.0.2"
+        "wyrihaximus/react-child-process-messenger": "^4.0.3"
     },
     "require-dev": {
         "wyrihaximus/async-test-utilities": "^4.2"
