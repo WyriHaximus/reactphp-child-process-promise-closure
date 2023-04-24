@@ -2,7 +2,8 @@
   "symbol-whitelist" : [
     "null", "true", "false",
     "static", "self", "parent",
-    "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed"
+    "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed",
+    "childProcessPromise", "Safe\\json_decode"
   ],
   "php-core-extensions" : [
     "Core",

@@ -8,7 +8,7 @@ $loop = EventLoopFactory::create();
 
 childProcessPromiseClosure($loop, function () {
     return ['time'=>\time()];
-})->done(function ($time): void {
+})->done(function (array $time): void {
     echo $time['time'], \PHP_EOL;
 }, function (Throwable $throwable): void {
     echo (string)$throwable;
