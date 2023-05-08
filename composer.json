@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": "^8 || ^7.4",
-        "react/event-loop": "^1.2",
+        "react/event-loop": "^1.4",
         "react/promise": "^2.10",
         "wyrihaximus/react-child-process-closure": "^1.2",
         "wyrihaximus/react-child-process-messenger": "^4.0.2"
